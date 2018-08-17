@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DllChecker", "DllChecker\DllChecker.csproj", "{1924C719-95B6-4DB1-8B46-12523B7B2D42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiffPlex", "DiffPlex\DiffPlex.csproj", "{3A7DD291-DCBB-4FA7-BE7F-76F1DFCD5DFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiffPlex.ConsoleRunner", "DiffPlex.ConsoleRunner\DiffPlex.ConsoleRunner.csproj", "{9226A2F4-5469-4559-9E6C-5A0298E7F858}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1924C719-95B6-4DB1-8B46-12523B7B2D42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1924C719-95B6-4DB1-8B46-12523B7B2D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1924C719-95B6-4DB1-8B46-12523B7B2D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1924C719-95B6-4DB1-8B46-12523B7B2D42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A7DD291-DCBB-4FA7-BE7F-76F1DFCD5DFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A7DD291-DCBB-4FA7-BE7F-76F1DFCD5DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A7DD291-DCBB-4FA7-BE7F-76F1DFCD5DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A7DD291-DCBB-4FA7-BE7F-76F1DFCD5DFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9226A2F4-5469-4559-9E6C-5A0298E7F858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9226A2F4-5469-4559-9E6C-5A0298E7F858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9226A2F4-5469-4559-9E6C-5A0298E7F858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9226A2F4-5469-4559-9E6C-5A0298E7F858}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
