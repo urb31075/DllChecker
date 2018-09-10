@@ -14,6 +14,7 @@ namespace DllChecker
     using System.IO;
     using System.Linq;
     using System.Security.Cryptography;
+    using System.Threading;
     using System.Windows.Forms;
 
     using DiffPlex;
@@ -29,10 +30,14 @@ namespace DllChecker
     /// </summary>
     public partial class MainForm : Form
     {
+        private readonly SynchronizationContext originalContext;
         private string SrcDirectory = @"Y:\";
         private string SnapshotDirectory = @"D:\DLLSNAPSHOT\";
         private string ReleaseDirectory = @"D:\DLLRELEASE\";
         private string DebugDirectory = @"D:\DLLDEBUG\";
+        private string MsbuildPath = @"C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe";
+        private string PrjFile = @"C:\InvestorFullCompilation\InvestorFullCompilation\InvestorFullCompilation.sln";
+        private string CommandLine = @"/t:Rebuild /p:Configuration=Release";   // /p:RunCodeAnalysis=true
 
         /// <summary>
         /// The src checksum dictionary.
@@ -56,6 +61,7 @@ namespace DllChecker
         public MainForm()
         {
             this.InitializeComponent();
+            this.originalContext = SynchronizationContext.Current;
         }
 
         private void MainFormLoad(object sender, EventArgs e)
@@ -75,6 +81,36 @@ namespace DllChecker
             this.SnapshotDirectoryTextBox.Text = this.SnapshotDirectory;
             this.ReleaseDirectoryTextBox.Text = this.ReleaseDirectory;
             this.DebugDirectoryTextBox.Text = this.DebugDirectory;
+            this.MsbuildPathTextBox.Text = this.MsbuildPath;
+            this.PrjFileTextBox.Text = this.PrjFile;
+            this.CommandLineTextBox.Text = this.CommandLine;
+        }
+
+        private async void RebuildButtonClick(object sender, EventArgs e)
+        {
+            var msbuild = new MsBuild();
+            var msbuildPath = this.MsbuildPathTextBox.Text;
+            var prjFile = this.PrjFileTextBox.Text;
+            var commandLine = this.CommandLineTextBox.Text;
+
+            this.InfoListBox.Items.Clear();
+            var result = await msbuild.Execute(msbuildPath, prjFile, commandLine, this.OutMessage);
+            this.InfoListBox.Items.Add(result.ToString());
+            if (this.InfoListBox.Items.Cast<string>().Any(item => item.Contains("Сборка успешно завершена.")))
+            {
+                this.InfoListBox.Items.Add("MsBuild Ok!");
+                MessageBox.Show(@"MsBuild Ok!", @"Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                this.InfoListBox.Items.Add("MsBuild Error!");
+                MessageBox.Show(@"MsBuild Error!", @"Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void OutMessage(string message)
+        {
+            this.originalContext.Post(c => { this.InfoListBox.Items.Add(c.ToString()); }, message);
         }
 
         /// <summary>
@@ -496,6 +532,11 @@ namespace DllChecker
         private void DebugPathButtonClick(object sender, EventArgs e)
         {
             this.DebugDirectoryTextBox.Text = GetDirectory(this.DebugDirectoryTextBox.Text);
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

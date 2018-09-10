@@ -34,6 +34,7 @@
             this.ProgressLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.RebuildButton = new System.Windows.Forms.Button();
             this.DebugPathButton = new System.Windows.Forms.Button();
             this.ReleasePathButton = new System.Windows.Forms.Button();
             this.SnapshotPathButton = new System.Windows.Forms.Button();
@@ -56,6 +57,11 @@
             this.OldRichTextBox = new System.Windows.Forms.RichTextBox();
             this.ProbeDirLabel = new System.Windows.Forms.Label();
             this.NewRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.MsbuildPathTextBox = new System.Windows.Forms.TextBox();
+            this.PrjFileTextBox = new System.Windows.Forms.TextBox();
+            this.CommandLineTextBox = new System.Windows.Forms.TextBox();
+            this.RebuildGroupBox = new System.Windows.Forms.GroupBox();
+            this.DllCheckGroupBox = new System.Windows.Forms.GroupBox();
             this.MainStatusStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -64,6 +70,8 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.RebuildGroupBox.SuspendLayout();
+            this.DllCheckGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainStatusStrip
@@ -72,9 +80,9 @@
             this.MainStatusLabel,
             this.MainProgressBar,
             this.ProgressLabel});
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 674);
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 769);
             this.MainStatusStrip.Name = "MainStatusStrip";
-            this.MainStatusStrip.Size = new System.Drawing.Size(1110, 25);
+            this.MainStatusStrip.Size = new System.Drawing.Size(990, 25);
             this.MainStatusStrip.TabIndex = 9;
             this.MainStatusStrip.Text = "statusStrip1";
             // 
@@ -106,40 +114,38 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1110, 674);
+            this.tabControl1.Size = new System.Drawing.Size(990, 769);
             this.tabControl1.TabIndex = 11;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.DebugPathButton);
-            this.tabPage1.Controls.Add(this.ReleasePathButton);
-            this.tabPage1.Controls.Add(this.SnapshotPathButton);
-            this.tabPage1.Controls.Add(this.SrcPathButton);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.DebugDirectoryTextBox);
-            this.tabPage1.Controls.Add(this.ReleaseDirectoryTextBox);
-            this.tabPage1.Controls.Add(this.SnapshotDirectoryTextBox);
-            this.tabPage1.Controls.Add(this.SrcDirectoryTextBox);
-            this.tabPage1.Controls.Add(this.DecompileButton);
-            this.tabPage1.Controls.Add(this.ClipboardButton);
-            this.tabPage1.Controls.Add(this.CheckButton);
+            this.tabPage1.Controls.Add(this.DllCheckGroupBox);
+            this.tabPage1.Controls.Add(this.RebuildGroupBox);
             this.tabPage1.Controls.Add(this.InfoListBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPage1.Size = new System.Drawing.Size(1102, 648);
+            this.tabPage1.Size = new System.Drawing.Size(982, 743);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "DllCheck";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // RebuildButton
+            // 
+            this.RebuildButton.Location = new System.Drawing.Point(6, 19);
+            this.RebuildButton.Name = "RebuildButton";
+            this.RebuildButton.Size = new System.Drawing.Size(73, 23);
+            this.RebuildButton.TabIndex = 25;
+            this.RebuildButton.Text = "Rebuild";
+            this.RebuildButton.UseVisualStyleBackColor = true;
+            this.RebuildButton.Click += new System.EventHandler(this.RebuildButtonClick);
             // 
             // DebugPathButton
             // 
             this.DebugPathButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DebugPathButton.Location = new System.Drawing.Point(1061, 81);
+            this.DebugPathButton.Location = new System.Drawing.Point(922, 95);
             this.DebugPathButton.Name = "DebugPathButton";
             this.DebugPathButton.Size = new System.Drawing.Size(33, 23);
             this.DebugPathButton.TabIndex = 24;
@@ -150,7 +156,7 @@
             // ReleasePathButton
             // 
             this.ReleasePathButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ReleasePathButton.Location = new System.Drawing.Point(1061, 56);
+            this.ReleasePathButton.Location = new System.Drawing.Point(922, 70);
             this.ReleasePathButton.Name = "ReleasePathButton";
             this.ReleasePathButton.Size = new System.Drawing.Size(33, 23);
             this.ReleasePathButton.TabIndex = 23;
@@ -161,7 +167,7 @@
             // SnapshotPathButton
             // 
             this.SnapshotPathButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SnapshotPathButton.Location = new System.Drawing.Point(1061, 31);
+            this.SnapshotPathButton.Location = new System.Drawing.Point(922, 45);
             this.SnapshotPathButton.Name = "SnapshotPathButton";
             this.SnapshotPathButton.Size = new System.Drawing.Size(33, 23);
             this.SnapshotPathButton.TabIndex = 22;
@@ -172,7 +178,7 @@
             // SrcPathButton
             // 
             this.SrcPathButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SrcPathButton.Location = new System.Drawing.Point(1061, 6);
+            this.SrcPathButton.Location = new System.Drawing.Point(922, 20);
             this.SrcPathButton.Name = "SrcPathButton";
             this.SrcPathButton.Size = new System.Drawing.Size(33, 23);
             this.SrcPathButton.TabIndex = 21;
@@ -183,7 +189,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(93, 86);
+            this.label6.Location = new System.Drawing.Point(6, 100);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(95, 13);
             this.label6.TabIndex = 20;
@@ -192,7 +198,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(93, 61);
+            this.label5.Location = new System.Drawing.Point(6, 75);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(106, 13);
             this.label5.TabIndex = 19;
@@ -201,7 +207,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(93, 37);
+            this.label4.Location = new System.Drawing.Point(6, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(76, 13);
             this.label4.TabIndex = 18;
@@ -210,51 +216,51 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(93, 12);
+            this.label3.Location = new System.Drawing.Point(6, 26);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 13);
+            this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 17;
-            this.label3.Text = "Sourse path";
+            this.label3.Text = "Source path";
             // 
             // DebugDirectoryTextBox
             // 
             this.DebugDirectoryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.DebugDirectoryTextBox.Location = new System.Drawing.Point(201, 83);
+            this.DebugDirectoryTextBox.Location = new System.Drawing.Point(126, 97);
             this.DebugDirectoryTextBox.Name = "DebugDirectoryTextBox";
-            this.DebugDirectoryTextBox.Size = new System.Drawing.Size(854, 20);
+            this.DebugDirectoryTextBox.Size = new System.Drawing.Size(790, 20);
             this.DebugDirectoryTextBox.TabIndex = 16;
             // 
             // ReleaseDirectoryTextBox
             // 
             this.ReleaseDirectoryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ReleaseDirectoryTextBox.Location = new System.Drawing.Point(201, 58);
+            this.ReleaseDirectoryTextBox.Location = new System.Drawing.Point(126, 72);
             this.ReleaseDirectoryTextBox.Name = "ReleaseDirectoryTextBox";
-            this.ReleaseDirectoryTextBox.Size = new System.Drawing.Size(854, 20);
+            this.ReleaseDirectoryTextBox.Size = new System.Drawing.Size(790, 20);
             this.ReleaseDirectoryTextBox.TabIndex = 15;
             // 
             // SnapshotDirectoryTextBox
             // 
             this.SnapshotDirectoryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SnapshotDirectoryTextBox.Location = new System.Drawing.Point(200, 33);
+            this.SnapshotDirectoryTextBox.Location = new System.Drawing.Point(125, 47);
             this.SnapshotDirectoryTextBox.Name = "SnapshotDirectoryTextBox";
-            this.SnapshotDirectoryTextBox.Size = new System.Drawing.Size(855, 20);
+            this.SnapshotDirectoryTextBox.Size = new System.Drawing.Size(791, 20);
             this.SnapshotDirectoryTextBox.TabIndex = 14;
             // 
             // SrcDirectoryTextBox
             // 
             this.SrcDirectoryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SrcDirectoryTextBox.Location = new System.Drawing.Point(200, 8);
+            this.SrcDirectoryTextBox.Location = new System.Drawing.Point(125, 22);
             this.SrcDirectoryTextBox.Name = "SrcDirectoryTextBox";
-            this.SrcDirectoryTextBox.Size = new System.Drawing.Size(855, 20);
+            this.SrcDirectoryTextBox.Size = new System.Drawing.Size(791, 20);
             this.SrcDirectoryTextBox.TabIndex = 13;
             // 
             // DecompileButton
             // 
-            this.DecompileButton.Location = new System.Drawing.Point(6, 44);
+            this.DecompileButton.Location = new System.Drawing.Point(83, 126);
             this.DecompileButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.DecompileButton.Name = "DecompileButton";
             this.DecompileButton.Size = new System.Drawing.Size(74, 23);
@@ -265,7 +271,7 @@
             // 
             // ClipboardButton
             // 
-            this.ClipboardButton.Location = new System.Drawing.Point(5, 73);
+            this.ClipboardButton.Location = new System.Drawing.Point(162, 126);
             this.ClipboardButton.Name = "ClipboardButton";
             this.ClipboardButton.Size = new System.Drawing.Size(75, 23);
             this.ClipboardButton.TabIndex = 11;
@@ -275,7 +281,7 @@
             // 
             // CheckButton
             // 
-            this.CheckButton.Location = new System.Drawing.Point(6, 15);
+            this.CheckButton.Location = new System.Drawing.Point(5, 126);
             this.CheckButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.CheckButton.Name = "CheckButton";
             this.CheckButton.Size = new System.Drawing.Size(74, 23);
@@ -290,10 +296,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.InfoListBox.FormattingEnabled = true;
-            this.InfoListBox.Location = new System.Drawing.Point(7, 110);
+            this.InfoListBox.Location = new System.Drawing.Point(7, 279);
             this.InfoListBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.InfoListBox.Name = "InfoListBox";
-            this.InfoListBox.Size = new System.Drawing.Size(1088, 524);
+            this.InfoListBox.Size = new System.Drawing.Size(963, 446);
             this.InfoListBox.TabIndex = 10;
             // 
             // tabPage2
@@ -374,11 +380,82 @@
             this.NewRichTextBox.Text = "";
             this.NewRichTextBox.WordWrap = false;
             // 
+            // MsbuildPathTextBox
+            // 
+            this.MsbuildPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MsbuildPathTextBox.Location = new System.Drawing.Point(85, 22);
+            this.MsbuildPathTextBox.Name = "MsbuildPathTextBox";
+            this.MsbuildPathTextBox.Size = new System.Drawing.Size(872, 20);
+            this.MsbuildPathTextBox.TabIndex = 26;
+            this.MsbuildPathTextBox.Text = "C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\msbuild.exe";
+            // 
+            // PrjFileTextBox
+            // 
+            this.PrjFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PrjFileTextBox.Location = new System.Drawing.Point(85, 48);
+            this.PrjFileTextBox.Name = "PrjFileTextBox";
+            this.PrjFileTextBox.Size = new System.Drawing.Size(872, 20);
+            this.PrjFileTextBox.TabIndex = 27;
+            this.PrjFileTextBox.Text = "C:\\InvestorFullCompilation\\InvestorFullCompilation\\InvestorFullCompilation.sln";
+            // 
+            // CommandLineTextBox
+            // 
+            this.CommandLineTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CommandLineTextBox.Location = new System.Drawing.Point(85, 74);
+            this.CommandLineTextBox.Name = "CommandLineTextBox";
+            this.CommandLineTextBox.Size = new System.Drawing.Size(872, 20);
+            this.CommandLineTextBox.TabIndex = 28;
+            this.CommandLineTextBox.Text = "/t:Rebuild /p:Configuration=Release";
+            // 
+            // RebuildGroupBox
+            // 
+            this.RebuildGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RebuildGroupBox.Controls.Add(this.RebuildButton);
+            this.RebuildGroupBox.Controls.Add(this.CommandLineTextBox);
+            this.RebuildGroupBox.Controls.Add(this.MsbuildPathTextBox);
+            this.RebuildGroupBox.Controls.Add(this.PrjFileTextBox);
+            this.RebuildGroupBox.Location = new System.Drawing.Point(7, 6);
+            this.RebuildGroupBox.Name = "RebuildGroupBox";
+            this.RebuildGroupBox.Size = new System.Drawing.Size(963, 100);
+            this.RebuildGroupBox.TabIndex = 29;
+            this.RebuildGroupBox.TabStop = false;
+            this.RebuildGroupBox.Text = "Rebuild";
+            // 
+            // DllCheckGroupBox
+            // 
+            this.DllCheckGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DllCheckGroupBox.Controls.Add(this.label3);
+            this.DllCheckGroupBox.Controls.Add(this.CheckButton);
+            this.DllCheckGroupBox.Controls.Add(this.DebugPathButton);
+            this.DllCheckGroupBox.Controls.Add(this.ClipboardButton);
+            this.DllCheckGroupBox.Controls.Add(this.ReleasePathButton);
+            this.DllCheckGroupBox.Controls.Add(this.DecompileButton);
+            this.DllCheckGroupBox.Controls.Add(this.SnapshotPathButton);
+            this.DllCheckGroupBox.Controls.Add(this.SrcDirectoryTextBox);
+            this.DllCheckGroupBox.Controls.Add(this.SrcPathButton);
+            this.DllCheckGroupBox.Controls.Add(this.SnapshotDirectoryTextBox);
+            this.DllCheckGroupBox.Controls.Add(this.label6);
+            this.DllCheckGroupBox.Controls.Add(this.ReleaseDirectoryTextBox);
+            this.DllCheckGroupBox.Controls.Add(this.label5);
+            this.DllCheckGroupBox.Controls.Add(this.DebugDirectoryTextBox);
+            this.DllCheckGroupBox.Controls.Add(this.label4);
+            this.DllCheckGroupBox.Location = new System.Drawing.Point(7, 112);
+            this.DllCheckGroupBox.Name = "DllCheckGroupBox";
+            this.DllCheckGroupBox.Size = new System.Drawing.Size(963, 158);
+            this.DllCheckGroupBox.TabIndex = 30;
+            this.DllCheckGroupBox.TabStop = false;
+            this.DllCheckGroupBox.Text = "DLL Check";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1110, 699);
+            this.ClientSize = new System.Drawing.Size(990, 794);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.MainStatusStrip);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -390,7 +467,6 @@
             this.MainStatusStrip.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -398,6 +474,10 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.RebuildGroupBox.ResumeLayout(false);
+            this.RebuildGroupBox.PerformLayout();
+            this.DllCheckGroupBox.ResumeLayout(false);
+            this.DllCheckGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,7 +511,13 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button RebuildButton;
+        private System.Windows.Forms.GroupBox RebuildGroupBox;
+        private System.Windows.Forms.TextBox CommandLineTextBox;
+        private System.Windows.Forms.TextBox MsbuildPathTextBox;
+        private System.Windows.Forms.TextBox PrjFileTextBox;
+        private System.Windows.Forms.GroupBox DllCheckGroupBox;
+        public System.Windows.Forms.Label label3;
     }
 }
 
